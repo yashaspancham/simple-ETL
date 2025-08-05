@@ -1,0 +1,26 @@
+insert 10 rows at once
+
+load environment variables
+connect to database
+initialize cursor
+
+initialize empty map: company_name_to_id
+
+open CSV file
+read header
+
+initialize empty list: batch_rows
+
+for each row in CSV:
+    add row to batch_rows
+
+    if batch_rows has 10 rows:
+        process_batch(batch_rows)
+        clear batch_rows
+
+if batch_rows is not empty:
+    process_batch(batch_rows)  # process remaining rows
+
+commit transaction
+close DB and CSV file
+print performance metrics

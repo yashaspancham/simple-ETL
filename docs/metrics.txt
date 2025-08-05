@@ -1,0 +1,24 @@
+
+When we go entry by entry
+for 100 entries
+
+(simple-venv) ➜  CSVTODB-simple python3 -m pipeline
+
+--- Performance Metrics ---
+Time elapsed: 0.3331 seconds
+Current memory usage: 43.32 KB
+Peak memory usage: 61.64 KB
+CPU percent used: 0.0%
+Memory percent used: 0.21%
+
+for 1m entries
+
+(simple-venv) ➜  CSVTODB-simple python3 -m pipeline
+
+--- Performance Metrics ---
+Time elapsed: 3543.5544 seconds
+Current memory usage: 44.90 KB
+Peak memory usage: 73.35 KB
+CPU percent used: 0.0%
+Memory percent used: 0.21%
+
