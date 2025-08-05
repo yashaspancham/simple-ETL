@@ -112,12 +112,19 @@ SELECT * FROM customer_company;
 SELECT * FROM locations; 
 SELECT * FROM phones;
 
+--First 10 entries in the tables
+SELECT * FROM customers LIMIT 10; 
+SELECT * FROM companies LIMIT 10; 
+SELECT * FROM customer_company LIMIT 10; 
+SELECT * FROM locations LIMIT 10; 
+SELECT * FROM phones LIMIT 10;
+
 --Count of entries in the tables
-SELECT COUNT(*) FROM customers; 
-SELECT COUNT(*) FROM companies; 
-SELECT COUNT(*) FROM customer_company; 
-SELECT COUNT(*) FROM locations; 
-SELECT COUNT(*) FROM phones;
+SELECT COUNT(*) AS no_of_customers FROM customers; 
+SELECT COUNT(*) AS no_of_companies FROM companies; 
+SELECT COUNT(*) AS no_of_customer_company FROM customer_company; 
+SELECT COUNT(*) AS no_of_locations FROM locations; 
+SELECT COUNT(*) AS no_of_phones FROM phones;
 
 --Delete all entries in the tables
 DELETE FROM phones;

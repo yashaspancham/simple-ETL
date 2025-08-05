@@ -42,42 +42,71 @@ try:
     #source structure of the CSV file:
     #head-> |Index | Customer Id | First Name | Last Name |Company | City | Country | Phone 1 | Phone 2 | Email | Subscription Date | Website|
     #index->|   0  |      1      |     2      |  3        |   4    |  5   |   6     |   7     |   8     |   9   |         10        |   11   |
+
+    customer_data_batch=[]
+    customer_company_data_batch=[]
+    locations_data_batch=[]
+    primary_phone_data_batch=[]
+    company_id_cache={}
     for row in reader:
 
-        # customer_data_batch=[]
-        # companies_data_batch=[]
-        # customer_company_data_batch=[]
-        # locations_data_batch=[]
-        # primary_phone_primary_data_batch=[]
-        # primary_phone_secondary_data_batch=[]
-        # company_id_cache={}
-
-        # if customer_data_batch==10: 
         # print(f"Inserting row into customers:\n{row[1], row[2], row[3], row[9], row[10], row[11]}\n")
+        if len(customer_data_batch)==10:
+            cursor.executemany(customers_table_insert_query, customer_data_batch)
+            customer_data_batch.clear()
         customer_data = (row[1], row[2], row[3], row[9], row[10], row[11])
-        cursor.execute(customers_table_insert_query, customer_data)
+        customer_data_batch.append(customer_data)
 
         # print(f"Inserting row into companies: {row[4]}\n")
-        companies_data = (row[4],)
-        cursor.execute(companies_table_insert_query, companies_data)
-        company_id = cursor.lastrowid
+        if row[4] not in company_id_cache.values():
+            companies_data = (row[4],)
+            cursor.execute(companies_table_insert_query, companies_data)
+            company_id = cursor.lastrowid
+            company_id_cache[company_id] = row[4]
 
         # print(f"Inserting row into customer_company: {row[1], company_id}\n")
+        if len(customer_company_data_batch)==10:
+            cursor.executemany(customer_company_insert_query, customer_company_data_batch)
+            customer_company_data_batch.clear()
         customer_company_data = (row[1], company_id)
-        cursor.execute(customer_company_insert_query, customer_company_data)
+        customer_company_data_batch.append(customer_company_data)
 
         # print(f"Inserting row into locations: {row[1], row[5], row[6]}\n")
+
+        if len(locations_data_batch)==10:
+            cursor.executemany(locations_table_insert_query, locations_data_batch)
+            locations_data_batch.clear()
         locations_data = (row[1], row[5], row[6])
-        cursor.execute(locations_table_insert_query, locations_data)
+        locations_data_batch.append(locations_data)
+        # cursor.execute(locations_table_insert_query, locations_data)
 
         # print(f"Inserting row into phones: {row[1], 'primary', row[7]}\n")
-        primary_phone_primary_data = (row[1], 'primary', row[7])
-        cursor.execute(phones_table_insert_query, primary_phone_primary_data)
- 
         # print(f"Inserting row into phones: {row[1], 'secondary', row[8]}\n")
+        if len(primary_phone_data_batch) == 20:
+            cursor.executemany(phones_table_insert_query, primary_phone_data_batch)
+            primary_phone_data_batch.clear()
+        primary_phone_primary_data = (row[1], 'primary', row[7])
         primary_phone_secondary_data = (row[1], 'secondary', row[8])
-        cursor.execute(phones_table_insert_query, primary_phone_secondary_data)
+        primary_phone_data_batch.append(primary_phone_primary_data)
+        primary_phone_data_batch.append(primary_phone_secondary_data)
 
+
+    # Insert any remaining batched data
+    if customer_data_batch:
+        cursor.executemany(customers_table_insert_query, customer_data_batch)
+
+    if customer_company_data_batch:
+        cursor.executemany(customer_company_insert_query, customer_company_data_batch)
+
+    if locations_data_batch:
+        cursor.executemany(locations_table_insert_query, locations_data_batch)
+
+    if primary_phone_data_batch:
+        cursor.executemany(phones_table_insert_query, primary_phone_data_batch)
+
+
+
+    
     conn.commit()
     conn.close()
 
