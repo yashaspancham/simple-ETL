@@ -22,7 +22,7 @@ tracemalloc.start()
 process = psutil.Process()
 
 
-csvfile=open('dataset/customers-100.csv', newline='', encoding='utf-8')
+csvfile=open('dataset/customers-1000000.csv', newline='', encoding='utf-8')
 reader=csv.reader(csvfile)
 
 headers=next(reader)
@@ -131,8 +131,7 @@ finally:
 
     # Print metrics
     print(f"\n--- Performance Metrics ---")
-    print(f"Time elapsed: {elapsed:.4f} seconds")
-    print(f"Time elapsed: {(elapsed/60):.4f} minutses")
-    print(f"Peak memory usage: {peak / 1024:.2f} KB")
+    print(f"Time elapsed: {elapsed:.4f} seconds | {(elapsed/60):.4f} minutes")
+    print(f"Peak memory usage: {peak / 1024:.2f} KB | {peak / (1024 ** 2):.2f} MB | {peak / (1024 ** 3):.2f} GB")
     print(f"CPU percent used: {process.cpu_percent()}%")
     print(f"Memory percent used: {process.memory_percent():.2f}%")
