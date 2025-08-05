@@ -27,3 +27,6 @@ ENV/
 *.tsv
 *.sqlite3
 *.db
+
+#dataset
+dataset/
