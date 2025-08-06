@@ -1,3 +1,5 @@
+#for mysql use %s instead of ?
+
 customers_table_insert_query="""
 INSERT IGNORE INTO customers (customer_id, first_name, last_name, email, subscription_date, website)
 VALUES (?, ?, ?, ?, ?, ?)
