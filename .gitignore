@@ -35,3 +35,6 @@ dataset/
 # Terraform files secrets
 *.tfvars
 
+
+awscliv2.zip
+
