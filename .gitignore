@@ -30,3 +30,8 @@ ENV/
 
 #dataset
 dataset/
+*.csv
+
+# Terraform files secrets
+*.tfvars
+
