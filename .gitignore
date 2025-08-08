@@ -45,6 +45,7 @@ htmlcov/
 *.tfstate.*
 *.tfvars
 .terraform/
+.terraform*
 crash.log
 
 # AWS
