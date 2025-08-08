@@ -3,30 +3,81 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Virtual environment
+# Virtual environments
+.venv/
 venv/
-simple-venv
 env/
 ENV/
 
-# Environment variables
-.env*
+# Environment variable files
+.env
+.env.*
 
-# macOS and Linux system files
+# System files
 .DS_Store
+Thumbs.db
 
 # Logs and debug
 *.log
+*.out
 
-# IDE files
+# IDE/editor config
 .vscode/
 .idea/
+*.swp
 
-# CSV/data dump files
+# Python packaging
+*.egg
+*.egg-info/
+dist/
+build/
+*.manifest
+pip-wheel-metadata/
+
+# Test coverage
+htmlcov/
+.coverage
+.cache/
+.pytest_cache/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraform/
+.terraform*
+crash.log
+
+# AWS
+.aws-sam/
+.aws/
+.awscliv2.zip
+
+# Lambda artifacts
+lambda.zip
+layer.zip
+*.zip
+
+# CSV / datasets
 *.csv
 *.tsv
+*.json
 *.sqlite3
 *.db
-
-#dataset
 dataset/
+output/
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Misc
+nohup.out
+*.bak
+*.tmp
+*.orig
+.terraform/
+.terraform/
+
+
+bfg.jar
+*.jar
