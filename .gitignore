@@ -74,3 +74,4 @@ nohup.out
 *.bak
 *.tmp
 *.orig
+.terraform/
