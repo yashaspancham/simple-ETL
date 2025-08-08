@@ -55,6 +55,7 @@ crash.log
 # Lambda artifacts
 lambda.zip
 layer.zip
+*.zip
 
 # CSV / datasets
 *.csv
