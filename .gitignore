@@ -77,3 +77,7 @@ nohup.out
 *.orig
 .terraform/
 .terraform/
+
+
+bfg.jar
+*.jar
